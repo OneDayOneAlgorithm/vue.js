@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red-text{
+            color :red
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>{{msg}}</div>
+        <button v-on:click="func1">눌러봐!!</button>
+        <button @click="func1">눌러봐!!</button>
+        <p v-text="msg"></p>
+        <p v-html="msg"></p>
+        <p v-show="isActive">이 글이 보이나요??????</p>
+        <p v-if="isActive">v-if : 이 글이 보이나요??????</p>
+        <p v-bind:class="redText">글자에 빨간 글씨 디자인을 적용하고 싶습니다.</p>
+        <!-- 값:조건(참,거짓) 조건부 바인딩 : 조건이 참이면 해당 속성을 바인딩-->
+        <p :class="[isActive? redText : '']">글자에 빨간 글씨 디자인을 적용하고 싶습니다.ㅏ</p>
+        <!-- v-bidn : 지정한 html 요소 속성에 값 설정 
+            (key 라는 속성에 word.id를 집어 넣겠다.) -->
+        <div v-for="(word,id) in words" v-bind:key="word.id"> 
+            <p> {{id}} : {{ word.value }}</p>
+        </div>
+        <input type="text" v-model="inputText">
+        <p>{{inputText}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <script>
+        const app=new Vue({
+            el : '#app',
+            data : {
+                msg : 'Hello world!',
+                redText : 'red-text',
+                blueText : 'blue-text',
+                isActive : false,
+                words : [
+                    {id:1,value:'apple'}, 
+                    {id:2,value:'banana'},
+                    {id:3,value:'car'}
+                ],
+                inputText : ''
+            },
+            methods : {
+                func1 : function(){
+                    this.isActive = !this.isActive
+                },
+                func2(){
+                    alert('Hello!!!!222222')
+                },
+            }
+        })
+        
+    </script>
+</body>
+</html>
